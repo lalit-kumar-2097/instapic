@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <div class="page-layout">
+            <p>Results Via Insta Pic</p>
+        </div>    
+    </nav>    
+    <section id="main-data">
+    <div class="page-layout">
+    {% for item in data %}        
+        <h2>{{ item.post_id }} ⬇️</h2>   
+            <div class="container">                 
+                {% for data in item.DATA %}
+                    <div class="box">
+                        <div class="photo">
+                            {{ data.Element }}
+                        </div>
+                        <li>id: {{ data.post_id }}</li>
+                        {% if "Image" in data.Type %}
+                            <li class = "type-img">Type: {{ data.Type }}</li>
+                            {% else %}
+                            <li class = "type-video">Type: {{ data.Type }}</li>
+                        {% endif %}
+                        <li>MD5: <span id="copy-text" onclick="copyToClipboard()" title = "Click to copy">{{ data.MD5 }} </span></li>
+                        <a href="{{ data.File }}" download = "{{ data.MD5 }}">Download ⬇️</a>
+                    </div>    
+                {% endfor %}            
+            </div>
+            <br>
+            <br>
+    {% endfor %}
+    </div>    
+    </section>
+</body>
+
+</html>
